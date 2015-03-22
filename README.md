@@ -16,7 +16,7 @@ The commands provided on the commandline are:
 - quit
 
 ## Interacting with the BowlingGame class
-## After creating an instance there 4 public methods you'll commonly use
+After creating an instance there 4 public methods you'll commonly use
 ### Roll
 The "roll" method inside of BowlingGame throws an InvalidCommand exception.
 This exception is thrown whenever the input is invalid (i.e., you try to score more than 10 points in a single frame or try to "roll" after the game has ended).
