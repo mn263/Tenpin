@@ -3,11 +3,15 @@ package com.company;
 import java.util.*;
 
 public class BowlingGame {
+
+	/* Commands for using the CommandLine interface */
 	private static final String NEW = "new";
 	private static final String ROLL = "roll";
 	private static final String SCORE = "score";
 	private static final String STATUS = "status";
 	private static final String QUIT = "quit";
+
+	/* Constants that are used in BowlingGame */
 	private static final int MAX_FRAMES_NUMBER = 12;
 	private static final int TENTH_FRAME_INDEX = 9;
 	private static final int ELEVENTH_FRAME_INDEX = 10;
@@ -17,6 +21,9 @@ public class BowlingGame {
 	private List<Frame> frameList;
 
 
+	/**
+	 * Default constructor creates all of the "Frame" objects the class will need
+	 */
 	public BowlingGame() {
 		frameList = new ArrayList<Frame>();
 
@@ -27,6 +34,10 @@ public class BowlingGame {
 	}
 
 
+	/**
+	 * This method cycles through the frames and recalculates the score whenever it is called
+	 * @return int - The current score
+	 */
 	public int getScore() {
 		int score = 0;
 		for (Frame frame : frameList) {
@@ -55,6 +66,10 @@ public class BowlingGame {
 		return score;
 	}
 
+	/**
+	 * Returns a "human-readable" string that is not meant to be parsed, but rather displayed to a user
+	 * @return String - Contains finished/in-progress status, current frame number, and current score
+	 */
 	public String getStatus() {
 		if (isFinished) {
 			return "Game finished. Score: " + getScore();
@@ -64,10 +79,26 @@ public class BowlingGame {
 		}
 	}
 
+	/**
+	 * Method indicates whether the game is still in progress or is finished
+	 * @return bool - isFinished (or not)
+	 */
 	public boolean isFinished() {
 		return isFinished;
 	}
 
+	/**
+	 * This method imitates a "Roll" in a real bowling game. It accepts the number of pins knocked down and updates the BowlingGame accordingly
+	 *
+	 * Invalid Command is used if the call to roll with the given number of "pinsDowned" is invalid.
+	 * Examples include, but are not limited to:
+	 * - Game has ended, but roll is still being called
+	 * - A frame had 'X' pins down in first roll and the 2nd roll in frame claims causes total to surpass 10
+	 * - The provided pinsDowned value is not in the range [0, 10]
+	 *
+	 * @param pinsDowned - integer in range [0,10] representing the number of pins knocked down in a "roll"
+	 * @throws InvalidCommand - Throwable Object that contains a useful message that can be displayed to a user indicating what went wrong
+	 */
 	public void roll(int pinsDowned) throws InvalidCommand {
 		if (isFinished()) {
 			throw new InvalidCommand("Unable to roll. Game has ended.");
@@ -141,7 +172,11 @@ public class BowlingGame {
 	}
 
 
-
+	/**
+	 * main method will start up a commandline interface for using bowling game
+	 *
+	 * @param args No arguments are necessary. When command line opens instructions will be provided.
+	 */
 	public static void main(String[] args) {
 		BowlingGame bowlingGame = null;
 		Scanner reader = new Scanner(System.in);
